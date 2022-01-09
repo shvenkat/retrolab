@@ -677,7 +677,6 @@ const zen: JupyterFrontEndPlugin<void> = {
     menu: IMainMenu | null
   ): void => {
     const { commands } = app;
-    const elem = document.documentElement;
     const trans = translator.load('retrolab');
 
     const toggleOn = () => {
@@ -697,18 +696,10 @@ const zen: JupyterFrontEndPlugin<void> = {
       label: trans.__('Toggle Zen Mode'),
       execute: () => {
         if (!zenModeEnabled) {
-          elem.requestFullscreen();
           toggleOn();
         } else {
-          document.exitFullscreen();
           toggleOff();
         }
-      }
-    });
-
-    document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement) {
-        toggleOff();
       }
     });
 
